@@ -1,41 +1,66 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 import pygame
 
-from code.Const import ENTITY_SPEED, WIN_HEIGHT, WIN_WIDTH, PLAYER_KEY_UP, PLAYER_KEY_DOWN, PLAYER_KEY_LEFT, \
-    PLAYER_KEY_RIGHT, PLAYER_KEY_SHOOT, ENTITY_SHOT_DELAY
+from code.Const import (
+    ENTITY_SPEED, WIN_WIDTH,
+    PLAYER_KEY_RIGHT, PLAYER_KEY_SHOOT,
+    ENTITY_SHOT_DELAY, GROUND_Y
+)
+
 from code.entity import Entity
 from code.playerShot import PlayerShot
 
 
 class Player(Entity):
-    def __init__(self, name:str, position:tuple):
-        super().__init__(name, position)
-        self.shot_delay = ENTITY_SHOT_DELAY[self.name] #para os tiros não saírem contínuos
 
+    def __init__(self, name: str, position: tuple):
+        super().__init__(name, position)
+
+        self.shot_delay = ENTITY_SHOT_DELAY[self.name]
+
+        # SOM DA MAGIA
+        self.shoot_sound = pygame.mixer.Sound('../asset/magic.wav')
+        self.shoot_sound.set_volume(0.3)
+
+        # física do pulo
+        self.vel_y = 0
+        self.gravity = 0.3
+        self.jump_force = -12
+        self.on_ground = True
 
     def move(self):
+
         pressed_key = pygame.key.get_pressed()
-        if pressed_key[PLAYER_KEY_UP[self.name]] and self.rect.top > 0:
-            self.rect.centery -= ENTITY_SPEED[self.name] #quanto mais pra cima o y, menor o número
-        if pressed_key[PLAYER_KEY_DOWN[self.name]] and self.rect.bottom < WIN_HEIGHT:
-            self.rect.centery += ENTITY_SPEED[self.name]
-        if pressed_key[PLAYER_KEY_LEFT[self.name]] and self.rect.left > 0:
-            self.rect.centerx -= ENTITY_SPEED[self.name]
-        if pressed_key[PLAYER_KEY_RIGHT[self.name]] and self.rect.right < WIN_WIDTH:
-            self.rect.centerx += ENTITY_SPEED[self.name]
-        pass
+
+        # pulo
+        if pressed_key[pygame.K_SPACE] and self.on_ground:
+            self.vel_y = self.jump_force
+            self.on_ground = False
+
+        # aplicar gravidade
+        self.vel_y += self.gravity
+        self.rect.y += self.vel_y
+
+        # colisão com o chão
+        if self.rect.bottom >= GROUND_Y:
+            self.rect.bottom = GROUND_Y
+            self.vel_y = 0
+            self.on_ground = True
 
     def shoot(self):
-        self.shot_delay -=1
-        if self.shot_delay == 0: #só atira quando chega em 0
-            self.shot_delay = ENTITY_SHOT_DELAY[self.name]
             pressed_key = pygame.key.get_pressed()
-            if pressed_key[PLAYER_KEY_SHOOT[self.name]]:
-                 return PlayerShot (name = f'{self.name}Shot', position = (self.rect.centerx, self.rect.centery))
-            else:
-                return None
-        else:
+
+            if pressed_key[PLAYER_KEY_SHOOT[self.name]] and self.shot_delay <= 0:
+                self.shot_delay = ENTITY_SHOT_DELAY[self.name]
+
+                self.shoot_sound.play()
+
+                return PlayerShot(
+                    name=f'{self.name}Shot',
+                    position=(self.rect.right, self.rect.centery)
+                )
+
+            self.shot_delay -= 1
+
             return None
 
 

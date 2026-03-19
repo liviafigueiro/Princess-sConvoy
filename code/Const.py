@@ -2,8 +2,9 @@
 import pygame
 
 C_ORANGE = (255, 128, 0)
-C_WHITE= (255, 255, 255)
-C_YELLOW = (255, 255, 128)
+C_WHEAT= (245, 222, 179)
+# C_ORCHID = (218, 112, 214)
+C_GOLD = (218, 165, 32)
 C_GREEN = (0, 128, 0)
 C_CYAN = (0, 128, 128)
 
@@ -24,14 +25,15 @@ ENTITY_DAMAGE = {
     'Level2Bg2': 0,
     'Level2Bg3': 0,
     'Level2Bg4': 0,
+    'Rock': 200,
+    'Log': 200,
     'Player1': 1,
     'Player1Shot': 35,
-    'Player2': 1,
-    'Player2Shot': 20,
     'Enemy1': 1,
     'Enemy1Shot': 25,
     'Enemy2': 1,
-    'Enemy2Shot': 40
+    'Enemy2Shot': 40,
+    'Castle': 0
 
 }
 
@@ -48,14 +50,15 @@ ENTITY_SCORE = {
     'Level2Bg2': 0,
     'Level2Bg3': 0,
     'Level2Bg4': 0,
+    'Rock': 0,
+    'Log': 0,
     'Player1': 0,
     'Player1Shot': 0,
-    'Player2': 0,
-    'Player2Shot': 0,
     'Enemy1': 100,
     'Enemy1Shot': 0,
     'Enemy2': 125,
-    'Enemy2Shot': 0
+    'Enemy2Shot': 0,
+    'Castle':0
 }
 
 
@@ -72,22 +75,21 @@ ENTITY_SPEED = {
     'Level2Bg2': 2,
     'Level2Bg3': 3,
     'Level2Bg4': 4,
+    'Rock': 4,
+    'Log': 4,
     'Player1': 3,
     'Player1Shot': 1,
-    'Player2': 3,
-    'Player2Shot': 3,
     'Enemy1': 1,
     'Enemy1Shot': 3,
     'Enemy2': 1,
     'Enemy2Shot': 5,
+    'Castle': 0.1
 }
 
 ENTITY_SHOT_DELAY = {
     'Player1': 20,
-    'Player2': 15,
     'Enemy1':90,
-    'Enemy2': 100
-
+    'Enemy2': 90,
 
 }
 
@@ -104,29 +106,28 @@ ENTITY_HEALTH = {
     'Level2Bg2': 999,
     'Level2Bg3': 999,
     'Level2Bg4': 999,
+    'Rock': 999,
+    'Log': 999,
     'Player1': 200,
     'Player1Shot': 1,
-    'Player2': 200,
-    'Player2Shot': 1,
     'Enemy1': 50,
     'Enemy1Shot': 1,
-    'Enemy2': 60,
-    'Enemy2Shot':1
+    'Castle': 999
+
 
 }
 
+
 #M
-MENU_OPTION = ('NEW GAME 1P',
-               'NEW GAME 2P - COOPERATIVE',
-               'NEW GAME 2P - COMPETITIVE',
+MENU_OPTION = ('NEW GAME',
                'SCORE',
-               'EXIT')
+               'EXIT',)
 #P
-PLAYER_KEY_UP = {'Player1': pygame.K_UP, 'Player2': pygame.K_w}
-PLAYER_KEY_DOWN = {'Player1': pygame.K_DOWN, 'Player2': pygame.K_s}
-PLAYER_KEY_LEFT = {'Player1': pygame.K_LEFT, 'Player2': pygame.K_a}
-PLAYER_KEY_RIGHT = {'Player1': pygame.K_RIGHT, 'Player2': pygame.K_d}
-PLAYER_KEY_SHOOT = {'Player1': pygame.K_RCTRL, 'Player2': pygame.K_LCTRL}
+PLAYER_KEY_UP = {'Player1': pygame.K_UP}
+PLAYER_KEY_DOWN = {'Player1': pygame.K_DOWN}
+PLAYER_KEY_LEFT = {'Player1': pygame.K_LEFT}
+PLAYER_KEY_RIGHT = {'Player1': pygame.K_RIGHT}
+PLAYER_KEY_SHOOT = {'Player1': pygame.K_RSHIFT}
 
 
 #S
@@ -140,19 +141,26 @@ TIMEOUT_LEVEL = 20000 #20 segundos
 WIN_WIDTH = 576
 WIN_HEIGHT = 324
 
-#S
-SCORE_POS = {'Title': (WIN_WIDTH / 2, 50),
-             'EnterName': (WIN_WIDTH / 2, 80),
-             'Label': (WIN_WIDTH / 2, 90),
-             'Name': (WIN_WIDTH / 2, 110),
-             0: (WIN_WIDTH / 2, 110),
-             1: (WIN_WIDTH / 2, 130),
-             2: (WIN_WIDTH / 2, 150),
-             3: (WIN_WIDTH / 2, 170),
-             4: (WIN_WIDTH / 2, 190),
-             5: (WIN_WIDTH / 2, 210),
-             6: (WIN_WIDTH / 2, 230),
-             7: (WIN_WIDTH / 2, 250),
-             8: (WIN_WIDTH / 2, 270),
-             9: (WIN_WIDTH / 2, 290),
-             }
+#G
+GROUND_Y = WIN_HEIGHT - 10
+
+
+SCORE_POS = {
+
+    'EnterNameLabel': (250, 150),
+    'EnterNameInput': (250, 190),
+    'NameLabel': (250, 120),
+    'ScoreLabel': (450, 120),
+    'DateLabel': (550, 120),
+
+    0: (250, 160),
+    1: (250, 190),
+    2: (250, 220),
+    3: (250, 250),
+    4: (250, 280),
+    5: (250, 310),
+    6: (250, 340),
+    7: (250, 370),
+    8: (250, 400),
+    9: (250, 430),
+}

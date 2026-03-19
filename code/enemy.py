@@ -1,21 +1,45 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
-from code.Const import ENTITY_SPEED, ENTITY_SHOT_DELAY
+from code.entity import Entity
+from code.Const import ENTITY_SHOT_DELAY
 from code.enemyShot import EnemyShot
-from code.entity import  Entity
 
 
 class Enemy(Entity):
-    def __init__(self, name: str, position: tuple):
-        super().__init__(name, position)
-        self.shot_delay = ENTITY_SHOT_DELAY[self.name]  # para os tiros não saírem contínuos
 
-    def move(self):
-        self.rect.centerx -= ENTITY_SPEED[self.name]
+    def __init__(self, name, position):
+
+        super().__init__(name, position)
+
+        self.speed = 4
+
+        # cooldown do tiro
+        self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 120)
+
+    def move(self, player=None):
+
+        # movimento normal
+        self.rect.x -= self.speed
+
+        # se tiver jogador e estiver perto → acelera
+        if player:
+
+            distance = self.rect.x - player.rect.x
+
+
 
     def shoot(self):
-        self.shot_delay -= 1
-        if self.shot_delay == 0:  # só atira quando chega em 0
-            self.shot_delay = ENTITY_SHOT_DELAY[self.name]
-            return EnemyShot(name=f'{self.name}Shot', position=(self.rect.centerx, self.rect.centery))
 
+
+        self.shot_delay -= 1
+
+        if self.shot_delay <= 0:
+
+
+            self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 120)
+
+            return EnemyShot(
+                name=f'{self.name}Shot',
+                position=(self.rect.left, self.rect.centery)
+            )
+
+        return None
