@@ -1,0 +1,15 @@
+# ambiente virtual
+.venv/
+venv/
+
+# cache python
+__pycache__/
+*.pyc
+
+# configurações de IDE
+.idea/
+
+# arquivos do sistema
+.DSScore
+Thumbs.db
+
