@@ -12,7 +12,7 @@ class Obstacle(Entity):
 
     def move(self):
 
-        # movimento do runner (direita → esquerda)
+        # movimento do runner
         self.rect.x -= self.speed
 
         # remove se sair da tela

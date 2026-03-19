@@ -1,8 +1,7 @@
 import pygame
 
 from code.Const import (
-    ENTITY_SPEED, WIN_WIDTH,
-    PLAYER_KEY_RIGHT, PLAYER_KEY_SHOOT,
+    PLAYER_KEY_SHOOT,
     ENTITY_SHOT_DELAY, GROUND_Y
 )
 

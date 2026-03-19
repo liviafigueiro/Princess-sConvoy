@@ -3,7 +3,6 @@ import pygame
 
 C_ORANGE = (255, 128, 0)
 C_WHEAT= (245, 222, 179)
-# C_ORCHID = (218, 112, 214)
 C_GOLD = (218, 165, 32)
 C_GREEN = (0, 128, 0)
 C_CYAN = (0, 128, 128)
