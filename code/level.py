@@ -13,10 +13,12 @@ from code.Const import (
 )
 
 from code.enemy import Enemy
+from code.enemyShot import EnemyShot
 from code.entity import Entity
 from code.entityFactory import EntityFactory
 from code.entityMediator import EntityMediator
 from code.player import Player
+from code.playerShot import PlayerShot
 
 
 class Level:
@@ -190,6 +192,20 @@ class Level:
 
             # remover mortos
             EntityMediator.verify_health(self.entity_list)
+            # remover tiros de inimigos mortos
+            self.entity_list = [
+                ent for ent in self.entity_list
+                if not (
+                        isinstance(ent, EnemyShot) and
+                        (ent.owner not in self.entity_list)
+                )
+            ]
+            self.entity_list = [
+                ent for ent in self.entity_list
+                if not (
+                        isinstance(ent, PlayerShot) and ent.lifetime <= 0
+                )
+            ]
 
             for ent in self.entity_list:
                 if isinstance(ent, Player):

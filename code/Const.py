@@ -27,11 +27,9 @@ ENTITY_DAMAGE = {
     'Rock': 200,
     'Log': 200,
     'Player1': 1,
-    'Player1Shot': 35,
+    'Player1Shot': 20,
     'Enemy1': 1,
     'Enemy1Shot': 25,
-    'Enemy2': 1,
-    'Enemy2Shot': 40,
     'Castle': 0
 
 }
@@ -55,8 +53,6 @@ ENTITY_SCORE = {
     'Player1Shot': 0,
     'Enemy1': 100,
     'Enemy1Shot': 0,
-    'Enemy2': 125,
-    'Enemy2Shot': 0,
     'Castle':0
 }
 
@@ -78,17 +74,15 @@ ENTITY_SPEED = {
     'Log': 4,
     'Player1': 3,
     'Player1Shot': 1,
-    'Enemy1': 1,
-    'Enemy1Shot': 3,
-    'Enemy2': 1,
-    'Enemy2Shot': 5,
+    'Enemy1': 0.8,
+    'Enemy1Shot': 6,
     'Castle': 0.1
 }
 
 ENTITY_SHOT_DELAY = {
     'Player1': 20,
-    'Enemy1':90,
-    'Enemy2': 90,
+    'Enemy1':40,
+
 
 }
 
@@ -109,7 +103,7 @@ ENTITY_HEALTH = {
     'Log': 999,
     'Player1': 200,
     'Player1Shot': 1,
-    'Enemy1': 50,
+    'Enemy1': 60,
     'Enemy1Shot': 1,
     'Castle': 999
 
@@ -134,7 +128,7 @@ SPAWN_TIME = 2000
 
 #T
 TIMEOUT_STEP = 100
-TIMEOUT_LEVEL = 20000 #20 segundos
+TIMEOUT_LEVEL = 25000 #25 segundos
 
 #W
 WIN_WIDTH = 576

@@ -20,13 +20,6 @@ class Enemy(Entity):
         # movimento normal
         self.rect.x -= self.speed
 
-        # se tiver jogador e estiver perto → acelera
-        if player:
-
-            distance = self.rect.x - player.rect.x
-
-
-
     def shoot(self):
 
 
@@ -39,7 +32,8 @@ class Enemy(Entity):
 
             return EnemyShot(
                 name=f'{self.name}Shot',
-                position=(self.rect.left, self.rect.centery)
+                position=(self.rect.left, self.rect.centery),
+                owner = self
             )
 
         return None

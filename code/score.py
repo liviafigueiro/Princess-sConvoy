@@ -19,7 +19,7 @@ class Score:
         self.rect = self.surf.get_rect(left=0, top=0)
 
     def save(self, player_score: list[int]):
-        pygame.mixer.music.load('../asset/Score.mp3')
+        pygame.mixer.music.load('../asset/score.wav')
         pygame.mixer.music.play(-1)
 
         db_proxy = DBProxy('DBScore')
@@ -58,7 +58,7 @@ class Score:
             pygame.display.flip()
 
     def show(self):
-            pygame.mixer.music.load('../asset/Score.mp3')
+            pygame.mixer.music.load('../asset/score.wav')
             pygame.mixer.music.play(-1)
 
             self.window.blit(self.surf, self.rect)

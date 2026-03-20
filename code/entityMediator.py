@@ -102,7 +102,7 @@ class EntityMediator:
     @staticmethod
     def verify_health(entity_list: list[Entity]):
 
-        for ent in entity_list[:]:  # cópia da lista (evita erro ao remover)
+        for ent in entity_list[:]:
 
             if ent.health <= 0:
 
